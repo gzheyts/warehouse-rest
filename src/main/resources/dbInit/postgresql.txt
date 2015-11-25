@@ -1,0 +1,18 @@
+-- Table: good
+
+-- DROP TABLE good;
+
+CREATE TABLE IF NOT EXISTS good
+(
+  loadtime timestamp without time zone,
+  shiptime timestamp without time zone,
+  id bigserial NOT NULL,
+  articleid bigint NOT NULL,
+  shipped boolean,
+  CONSTRAINT good_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE good
+  OWNER TO warehouse_service;
