@@ -1,9 +1,9 @@
-package com.demo.rest.service;
+package ru.gzheyts.warehouse.rest.service;
 
-import com.demo.rest.model.GoodPayload;
-import com.demo.rest.model.LoadResponse;
-import com.demo.rest.model.ShipResponse;
-import com.demo.rest.model.StatResponse;
+import ru.gzheyts.warehouse.rest.model.GoodPayload;
+import ru.gzheyts.warehouse.rest.model.LoadResponse;
+import ru.gzheyts.warehouse.rest.model.ShipResponse;
+import ru.gzheyts.warehouse.rest.model.StatResponse;
 import org.apache.log4j.Logger;
 import org.joda.time.Instant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,15 +109,11 @@ public class GoodServiceImpl implements GoodService {
 
         long timeInMillis = Instant.now().getMillis();
 
-
         ShipResponse response = new ShipResponse(timeInMillis);
-        tzUTC.getTimeInMillis();
-
 
         response = namedJdbcTemplate.query(QUERY_FETCH_ARTICLE_AMOUNT,
                 new MapSqlParameterSource("list", payload.getGoods().keySet()),
                 new DiffExtractor(payload.getGoods(), response));
-
 
         if (response.getNoEnoughGoods() == null) {
             doShip(payload, timeInMillis, response);
@@ -129,7 +125,7 @@ public class GoodServiceImpl implements GoodService {
         return response;
     }
 
-    private void doShip(GoodPayload payload, long timeInMillis, ShipResponse response) throws NoSuchArticleException {
+    private void doShip(final GoodPayload payload, long timeInMillis, final ShipResponse response) throws NoSuchArticleException {
         final List<Long> goodsToShip = new ArrayList<>();
 
             /* fetch good to ship ids */
@@ -156,7 +152,7 @@ public class GoodServiceImpl implements GoodService {
 
     @Transactional
     @Override
-    public StatResponse queryStatistics(final Long articleId, Long timestamp) {
+    public StatResponse queryStatistics(final Long articleId, final Long timestamp) {
 
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
 

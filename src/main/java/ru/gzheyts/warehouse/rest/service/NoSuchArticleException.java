@@ -1,4 +1,4 @@
-package com.demo.rest.service;
+package ru.gzheyts.warehouse.rest.service;
 
 /**
  * @author gzheyts

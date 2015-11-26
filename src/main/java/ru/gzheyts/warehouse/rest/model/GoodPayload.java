@@ -1,4 +1,4 @@
-package com.demo.rest.model;
+package ru.gzheyts.warehouse.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
